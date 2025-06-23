@@ -25,12 +25,12 @@ const Projects = () => {
 
   const projects = [
     {
-      title: 'Cloud Infrastructure Automation',
-      description: 'Automated AWS infrastructure deployment using Terraform and Jenkins CI/CD, reducing deployment time by 80% and ensuring consistent environments.',
+      title: 'Sugar Queen Bead Business',
+      description: 'Landing page for the Sugar Queen bead business',
       image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop',
-      tech: ['Terraform', 'AWS', 'Jenkins', 'Docker'],
-      github: '#',
-      demo: '#'
+      tech: ['React', 'LovableAi', 'Next.js', 'Docker'],
+      github: 'https://github.com/Jaaystones/sugar-queen-landing-page',
+      demo: 'https://sugar-queen-landing-page.loveable.app'
     },
     {
       title: 'Real-time Data Analytics Platform',
