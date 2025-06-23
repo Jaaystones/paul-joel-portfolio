@@ -19,7 +19,7 @@ const Hero = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-20 text-cyan-400/20 text-sm font-mono animate-float">const developer = 'Joel';</div>
         <div className="absolute top-40 right-32 text-blue-400/20 text-sm font-mono animate-float delay-300">console.log('Building the future');</div>
-        <div className="absolute bottom-32 left-16 text-purple-400/20 text-sm font-mono animate-float delay-700">function innovate() { return magic; }</div>
+        <div className="absolute bottom-32 left-16 text-purple-400/20 text-sm font-mono animate-float delay-700">function innovate() {'{'}return magic;{'}'}</div>
         <div className="absolute bottom-40 right-20 text-cyan-400/20 text-sm font-mono animate-float delay-1000">// Code that changes the world</div>
       </div>
       
