@@ -62,9 +62,9 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: Mail, href: 'mailto:joel@example.com', label: 'Email' },
-    { icon: Github, href: 'https://github.com/joel', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://linkedin.com/in/joel', label: 'LinkedIn' },
+    { icon: Mail, href: 'mailto:Joelpaul345@example.com', target: '_blank', label: 'Email' },
+    { icon: Github, href: 'https://github.com/Jaaystones', target: '_blank', label: 'GitHub' },
+    { icon: Linkedin, href: 'https://linkedin.com/in/paul-joel-osagie', target: '_blank', label: 'LinkedIn' },
   ];
 
   return (
@@ -96,6 +96,8 @@ const Contact = () => {
                 <a
                   key={index}
                   href={link.href}
+                  target={link.target}
+                  rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
                   className="flex items-center space-x-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 group"
                 >
                   <link.icon className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform duration-300" />

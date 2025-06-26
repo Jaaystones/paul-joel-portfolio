@@ -47,7 +47,9 @@ const About = () => {
             <div className="relative">
               <div className="w-80 h-80 mx-auto rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 p-1">
                 <div className="w-full h-full rounded-xl bg-slate-800 flex items-center justify-center">
-                  <div className="text-6xl">👨‍💻</div>
+                  <div className="text-6xl">
+                    <img src="src/Images/PHOTO-2025-04-18-08-39-18.jpg" alt="Profile" className="rounded-full w-64 h-64 object-cover shadow-lg" />
+                  </div>
                 </div>
               </div>
               <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-cyan-400 to-blue-400 rounded-full blur opacity-30"></div>
@@ -75,9 +77,13 @@ const About = () => {
               ))}
             </div>
 
-            <button className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+            <a
+              href="/src/public/Paul_Osagie_Joel_Software_Engineering.pdf"   target="_blank"
+              rel="noopener noreferrer"
+              className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 inline-block text-center"
+            >
               Download Resume
-            </button>
+            </a>
           </div>
         </div>
       </div>
