@@ -4,13 +4,13 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
-const repoName = "paul-joel-portfolio";
+const repoName = " paul-joel-portfolio";
 export default defineConfig(({ mode }) => ({
   base: `/${repoName}/`,
-  
+
   server: {
     host: "::",
-    port: 8080,
+    port: 8080, 
   },
   plugins: [
     react(),

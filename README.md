@@ -71,3 +71,42 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+## SET UP GITHUB PAGES
+1. npm install gh-pages --save-dev
+2. Edit vite.config.ts and add the repo name
+```
+const repoName = "paul-joel-portfolio";
+export default defineConfig(({ mode }) => ({
+  base: `/${repoName}/`,
+  
+  server: {
+    host: "::",
+    port: 8080,
+  },
+  plugins: [
+    react(),
+    mode === 'development' &&
+    componentTagger(),
+  ].filter(Boolean),
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+}));
+```
+3. Edit Package.json
+```
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "preview": "vite preview",
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d dist"
+}
+```
+4. Run the command
+```
+npm run deploy
+```
