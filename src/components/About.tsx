@@ -48,7 +48,7 @@ const About = () => {
               <div className="w-80 h-80 mx-auto rounded-2xl bg-gradient-to-br from-cyan-500/20 to-blue-500/20 p-1">
                 <div className="w-full h-full rounded-xl bg-slate-800 flex items-center justify-center">
                   <div className="text-6xl">
-                    <img src="src/Images/PHOTO-2025-04-18-08-39-18.jpg" alt="Profile" className="rounded-full w-64 h-64 object-cover shadow-lg" />
+                    <img src="PHOTO-2025-04-18-08-39-18.jpg" alt="Profile" className="rounded-full w-64 h-64 object-cover shadow-lg" />
                   </div>
                 </div>
               </div>
