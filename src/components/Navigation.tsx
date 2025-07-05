@@ -48,7 +48,7 @@ const Navigation = () => {
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-            Joel.dev
+            Paul Osagie Joel.dev
           </div>
           
           <div className="hidden md:flex space-x-8">

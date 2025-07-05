@@ -36,33 +36,33 @@ const Projects = () => {
       title: 'Real-time Data Analytics Platform',
       description: 'Built a scalable data processing pipeline handling 1M+ events daily, with real-time dashboards and predictive analytics capabilities.',
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
-      tech: ['Python', 'Apache Kafka', 'PostgreSQL', 'React'],
-      github: '#',
-      demo: '#'
+      tech: ['Typscript', 'Apache Kafka', 'PostgreSQL', 'Next.js'],
+      github: 'https://github.com/Jaaystones/type_script_projects',
+      demo: 'https://type-script-projects-yc93.vercel.app/'
     },
     {
       title: 'Microservices E-commerce API',
-      description: 'Developed a robust microservices architecture for e-commerce, featuring user management, inventory, payments, and order processing.',
+      description: 'Developed a robust microservices architecture for e-commerce, featuring user management, Search, Media, and Posting processes.',
       image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop',
       tech: ['Node.js', 'Express', 'MongoDB', 'Redis'],
-      github: '#',
+      github: 'https://github.com/Jaaystones/social_media_microservice',
       demo: '#'
     },
     {
-      title: 'AI-Powered Code Review Tool',
-      description: 'Machine learning system that analyzes code quality, suggests improvements, and detects potential security vulnerabilities automatically.',
-      image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop',
-      tech: ['Python', 'TensorFlow', 'Flask', 'Git API'],
-      github: '#',
-      demo: '#'
-    },
-    {
-      title: 'Smart IoT Monitoring System',
-      description: 'Complete IoT solution for industrial monitoring with real-time alerts, predictive maintenance, and comprehensive analytics dashboard.',
+      title: 'Personalised Note App for Small Businesses',
+      description: 'This is a note application for communication between business owners and employees.',
       image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop',
-      tech: ['Python', 'MQTT', 'InfluxDB', 'Grafana'],
-      github: '#',
-      demo: '#'
+      tech: ['Node.js', 'Redux', 'Postgres', 'React'],
+      github: 'https://github.com/Jaaystones/Note-API',
+      demo: 'https://stonegrowth.onrender.com/'
+    },
+    {
+      title: 'Binoaural Sound System',
+      description: 'Binoaural sound application with base and sweep frequency for mental alertness.',
+      image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop',
+      tech: ['Typescript', 'Vite', 'Tailwind CSS', 'Postgres'],
+      github: 'https://github.com/Jaaystones/MindWave_v3',
+      demo: 'https://mindwave-v3.onrender.com/'
     },
     {
       title: 'Distributed Task Scheduler',
