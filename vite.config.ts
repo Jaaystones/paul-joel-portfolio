@@ -3,10 +3,10 @@ import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
 
-const repoName = "paul-joel-portfolio";
+// const repoName = "paul-joel-portfolio";
 
 export default defineConfig(({ mode }) => ({
-  base: `/${repoName}/`,
+  base: '/',
   server: {
     host: "::",
     port: 8080,
