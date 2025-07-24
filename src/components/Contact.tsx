@@ -62,7 +62,7 @@ const Contact = () => {
   };
 
   const socialLinks = [
-    { icon: Mail, href: 'mailto:Joelpaul345@example.com', target: '_blank', label: 'Email' },
+    { icon: Mail, href: 'mailto:Joelpaul345@gmail.com', target: '_blank', label: 'Email' },
     { icon: Github, href: 'https://github.com/Jaaystones', target: '_blank', label: 'GitHub' },
     { icon: Linkedin, href: 'https://linkedin.com/in/paul-joel-osagie', target: '_blank', label: 'LinkedIn' },
   ];

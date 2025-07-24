@@ -30,7 +30,7 @@ const Projects = () => {
       image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop',
       tech: ['React', 'LovableAi', 'Next.js', 'Docker'],
       github: 'https://github.com/Jaaystones/sugar-queen-landing-page',
-      demo: 'https://sugar-queen-landing-page.loveable.app'
+      demo: 'https://sugar-queen-landing-page.onrender.com'
     },
     {
       title: 'Real-time Data Analytics Platform',
@@ -45,8 +45,7 @@ const Projects = () => {
       description: 'Developed a robust microservices architecture for e-commerce, featuring user management, Search, Media, and Posting processes.',
       image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop',
       tech: ['Node.js', 'Express', 'MongoDB', 'Redis'],
-      github: 'https://github.com/Jaaystones/social_media_microservice',
-      demo: '#'
+      github: 'https://github.com/Jaaystones/social_media_microservice'
     },
     {
       title: 'Personalised Note App for Small Businesses',
@@ -57,8 +56,8 @@ const Projects = () => {
       demo: 'https://stonegrowth.onrender.com/'
     },
     {
-      title: 'Binoaural Sound System',
-      description: 'Binoaural sound application with base and sweep frequency for mental alertness.',
+      title: 'Binaural Sound System',
+      description: 'Binaural sound application with base and sweep frequency for mental alertness.',
       image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop',
       tech: ['Typescript', 'Vite', 'Tailwind CSS', 'Postgres'],
       github: 'https://github.com/Jaaystones/MindWave_v3',
