@@ -1,6 +1,6 @@
 
 import { useEffect, useRef, useState } from 'react';
-import { Github } from 'lucide-react';
+import { GithubIcon } from 'lucide-react';
 
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -77,9 +77,8 @@ const Projects = () => {
   return (
     <section id="projects" ref={sectionRef} className="py-20 bg-slate-800/30">
       <div className="max-w-6xl mx-auto px-4">
-        <div className={`text-center mb-16 transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
             Featured Projects
           </h2>
@@ -93,20 +92,19 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`group relative bg-slate-900/50 rounded-xl overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-500 hover:transform hover:scale-105 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-              }`}
+              className={`group relative bg-slate-900/50 rounded-xl overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-500 hover:transform hover:scale-105 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="relative h-48 overflow-hidden">
-                <img 
-                  src={project.image} 
+                <img
+                  src={project.image}
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60"></div>
               </div>
-              
+
               <div className="p-6">
                 <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
                   {project.title}
@@ -114,10 +112,10 @@ const Projects = () => {
                 <p className="text-slate-400 mb-4 text-sm leading-relaxed">
                   {project.description}
                 </p>
-                
+
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, techIndex) => (
-                    <span 
+                    <span
                       key={techIndex}
                       className="px-2 py-1 bg-slate-800 text-cyan-400 text-xs rounded-md border border-cyan-500/30"
                     >
@@ -125,17 +123,21 @@ const Projects = () => {
                     </span>
                   ))}
                 </div>
-                
+
                 <div className="flex justify-between items-center">
-                  <a 
+                  <a
                     href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center space-x-2 text-slate-400 hover:text-cyan-400 transition-colors duration-300"
                   >
-                    <Github className="w-4 h-4" />
+                    <GithubIcon className="w-4 h-4" />
                     <span className="text-sm">Code</span>
                   </a>
-                  <a 
+                  <a
                     href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
                   >
                     Live Demo
