@@ -1,112 +1,93 @@
-# Welcome to your Lovable project
+# Paul Joel Portfolio
 
-## Project info
+A modern, responsive portfolio website showcasing my work as a Software Engineer, Data Scientist, and Cloud Solutions Architect.
 
-**URL**: https://lovable.dev/projects/2d7d9302-1df4-4348-9177-237d1e156c81
+## 🚀 Features
 
-## How can I edit this code?
+- **Modern Design**: Clean, professional design with dark/light mode toggle
+- **Responsive**: Fully responsive design that works on all devices
+- **Interactive**: Smooth animations and hover effects
+- **Performance**: Built with Vite for fast loading and optimal performance
+- **Type-Safe**: Full TypeScript support for better development experience
 
-There are several ways of editing your application.
+## 🛠️ Built With
 
-**Use Lovable**
+- **React 18** - Frontend framework
+- **TypeScript** - Type safety and better development experience
+- **Tailwind CSS** - Utility-first CSS framework
+- **Vite** - Fast build tool and development server
+- **Radix UI** - Accessible UI components
+- **Lucide React** - Beautiful icons
+- **React Query** - Data fetching and state management
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/2d7d9302-1df4-4348-9177-237d1e156c81) and start prompting.
+## 📁 Project Structure
 
-Changes made via Lovable will be committed automatically to this repo.
+```
+src/
+├── components/        # Reusable UI components
+│   ├── ui/           # Base UI components (buttons, cards, etc.)
+│   ├── About.tsx     # About section
+│   ├── Contact.tsx   # Contact form and information
+│   ├── Hero.tsx      # Hero/landing section
+│   ├── Navigation.tsx # Main navigation
+│   ├── Projects.tsx  # Featured projects showcase
+│   ├── Skills.tsx    # Skills and expertise
+│   └── ThemeToggle.tsx # Dark/light mode toggle
+├── pages/            # Page components
+├── hooks/            # Custom React hooks
+├── lib/              # Utility functions
+└── context/          # React context providers
+```
 
-**Use your preferred IDE**
+## 🚀 Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- Node.js (version 18 or higher)
+- npm or yarn
 
-Follow these steps:
+### Installation
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+1. Clone the repository:
+```bash
+git clone https://github.com/Jaaystones/paul-joel-portfolio.git
+cd paul-joel-portfolio
+```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+2. Install dependencies:
+```bash
+npm install
+```
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+3. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+4. Open your browser and visit `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Building for Production
 
-**Use GitHub Codespaces**
+To create a production build:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/2d7d9302-1df4-4348-9177-237d1e156c81) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
-
-## SET UP GITHUB PAGES
-1. npm install gh-pages --save-dev
-2. Edit vite.config.ts and add the repo name
+```bash
+npm run build
 ```
-const repoName = "paul-joel-portfolio";
-export default defineConfig(({ mode }) => ({
-  base: `/${repoName}/`,
-  
-  server: {
-    host: "::",
-    port: 8080,
-  },
-  plugins: [
-    react(),
-    mode === 'development' &&
-    componentTagger(),
-  ].filter(Boolean),
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-}));
-```
-3. Edit Package.json
-```
-"scripts": {
-  "dev": "vite",
-  "build": "vite build",
-  "preview": "vite preview",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
-}
-```
-4. Run the command
-```
-npm run deploy
-```
+
+The built files will be in the `dist` directory.
+
+## 📧 Contact
+
+Feel free to reach out to me:
+
+- **Email**: paulosagie@gmail.com
+- **LinkedIn**: [Joel Osagie Paul](https://linkedin.com/in/joel-osagie-paul)
+- **GitHub**: [Jaaystones](https://github.com/Jaaystones)
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+⭐ If you found this portfolio helpful or inspiring, please consider giving it a star!

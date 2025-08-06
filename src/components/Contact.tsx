@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Mail, Github, Linkedin } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -9,8 +10,9 @@ const Contact = () => {
     email: '',
     message: ''
   });
-  const [errors, setErrors] = useState<{[key: string]: string}>({});
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const sectionRef = useRef<HTMLElement>(null);
+  const { toast } = useToast();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,8 +32,8 @@ const Contact = () => {
   }, []);
 
   const validateForm = () => {
-    const newErrors: {[key: string]: string} = {};
-    
+    const newErrors: { [key: string]: string } = {};
+
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
@@ -39,7 +41,7 @@ const Contact = () => {
       newErrors.email = 'Email is invalid';
     }
     if (!formData.message.trim()) newErrors.message = 'Message is required';
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -47,9 +49,25 @@ const Contact = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      console.log('Form submitted:', formData);
-      // Handle form submission here
+      // Create mailto link with form data
+      const subject = encodeURIComponent(`Portfolio Contact: Message from ${formData.name}`);
+      const body = encodeURIComponent(
+        `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}\n\n---\nSent from Paul Joel Portfolio Contact Form`
+      );
+      const mailtoUrl = `mailto:Joelpaul345@gmail.com?subject=${subject}&body=${body}`;
+
+      // Open default email client
+      window.location.href = mailtoUrl;
+
+      // Clear form after attempting to send
       setFormData({ name: '', email: '', message: '' });
+
+      // Show success toast notification
+      toast({
+        title: "Email Client Opened",
+        description: "Your default email client should now be open with the message pre-filled. Please send the email to complete your message.",
+        variant: "default",
+      });
     }
   };
 
@@ -68,29 +86,27 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" ref={sectionRef} className="py-20 bg-slate-900">
+    <section id="contact" ref={sectionRef} className="py-20 bg-slate-100 dark:bg-slate-900 transition-colors duration-300">
       <div className="max-w-4xl mx-auto px-4">
-        <div className={`text-center mb-16 transition-all duration-1000 ${
-          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+          }`}>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
             Let's Connect
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-400 mx-auto rounded-full"></div>
-          <p className="text-slate-400 mt-6 text-lg">
+          <div className="w-24 h-1 bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 mx-auto rounded-full"></div>
+          <p className="text-slate-700 dark:text-slate-400 mt-6 text-lg">
             Let's collaborate or talk tech! I'm always excited to discuss new opportunities and innovative projects.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          <div className={`transition-all duration-1000 delay-300 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
-          }`}>
-            <h3 className="text-2xl font-bold text-white mb-6">Get in Touch</h3>
-            <p className="text-slate-400 mb-8 leading-relaxed">
+          <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
+            }`}>
+            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Get in Touch</h3>
+            <p className="text-slate-700 dark:text-slate-400 mb-8 leading-relaxed">
               Whether you have a project in mind, want to discuss technology, or simply want to connect, I'd love to hear from you. Let's build something amazing together!
             </p>
-            
+
             <div className="space-y-4">
               {socialLinks.map((link, index) => (
                 <a
@@ -98,10 +114,10 @@ const Contact = () => {
                   href={link.href}
                   target={link.target}
                   rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
-                  className="flex items-center space-x-4 p-4 bg-slate-800/50 rounded-lg border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 group"
+                  className="flex items-center space-x-4 p-4 bg-white/80 dark:bg-slate-800/50 rounded-lg border border-slate-300 dark:border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 group backdrop-blur-sm"
                 >
-                  <link.icon className="w-6 h-6 text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
-                  <span className="text-slate-300 group-hover: text-white transition-colors duration-300">
+                  <link.icon className="w-6 h-6 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
+                  <span className="text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-300">
                     {link.label}
                   </span>
                 </a>
@@ -109,9 +125,8 @@ const Contact = () => {
             </div>
           </div>
 
-          <div className={`transition-all duration-1000 delay-500 ${
-            isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
-          }`}>
+          <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
+            }`}>
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <input
@@ -120,11 +135,10 @@ const Contact = () => {
                   placeholder="Your Name"
                   value={formData.name}
                   onChange={handleChange}
-                  className={`w-full p-4 bg-slate-800/50 border rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 ${
-                    errors.name ? 'border-red-500' : 'border-slate-700/50'
-                  }`}
+                  className={`w-full p-4 bg-white/80 dark:bg-slate-800/50 border rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 backdrop-blur-sm ${errors.name ? 'border-red-500' : 'border-slate-300 dark:border-slate-700/50'
+                    }`}
                 />
-                {errors.name && <p className="text-red-400 text-sm mt-1">{errors.name}</p>}
+                {errors.name && <p className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.name}</p>}
               </div>
 
               <div>
@@ -134,11 +148,10 @@ const Contact = () => {
                   placeholder="Your Email"
                   value={formData.email}
                   onChange={handleChange}
-                  className={`w-full p-4 bg-slate-800/50 border rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 ${
-                    errors.email ? 'border-red-500' : 'border-slate-700/50'
-                  }`}
+                  className={`w-full p-4 bg-white/80 dark:bg-slate-800/50 border rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 backdrop-blur-sm ${errors.email ? 'border-red-500' : 'border-slate-300 dark:border-slate-700/50'
+                    }`}
                 />
-                {errors.email && <p className="text-red-400 text-sm mt-1">{errors.email}</p>}
+                {errors.email && <p className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.email}</p>}
               </div>
 
               <div>
@@ -148,16 +161,15 @@ const Contact = () => {
                   rows={6}
                   value={formData.message}
                   onChange={handleChange}
-                  className={`w-full p-4 bg-slate-800/50 border rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 resize-none ${
-                    errors.message ? 'border-red-500' : 'border-slate-700/50'
-                  }`}
+                  className={`w-full p-4 bg-white/80 dark:bg-slate-800/50 border rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 resize-none backdrop-blur-sm ${errors.message ? 'border-red-500' : 'border-slate-300 dark:border-slate-700/50'
+                    }`}
                 ></textarea>
-                {errors.message && <p className="text-red-400 text-sm mt-1">{errors.message}</p>}
+                {errors.message && <p className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.message}</p>}
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-cyan-500/25"
+                className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-500 dark:to-blue-500 hover:from-cyan-700 hover:to-blue-700 dark:hover:from-cyan-600 dark:hover:to-blue-600 text-white py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-cyan-500/25"
               >
                 Send Message
               </button>

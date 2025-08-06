@@ -28,7 +28,7 @@ const Projects = () => {
       title: 'Sugar Queen Bead Business',
       description: 'Landing page for the Sugar Queen bead business',
       image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop',
-      tech: ['React', 'LovableAi', 'Next.js', 'Docker'],
+      tech: ['React', 'Next.js', 'Docker', 'Tailwind CSS'],
       github: 'https://github.com/Jaaystones/sugar-queen-landing-page',
       demo: 'https://sugar-queen-landing-page.onrender.com'
     },
@@ -36,7 +36,7 @@ const Projects = () => {
       title: 'Real-time Data Analytics Platform',
       description: 'Built a scalable data processing pipeline handling 1M+ events daily, with real-time dashboards and predictive analytics capabilities.',
       image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
-      tech: ['Typscript', 'Apache Kafka', 'PostgreSQL', 'Next.js'],
+      tech: ['TypeScript', 'Apache Kafka', 'PostgreSQL', 'Next.js'],
       github: 'https://github.com/Jaaystones/type_script_projects',
       demo: 'https://type-script-projects-yc93.vercel.app/'
     },
@@ -59,7 +59,7 @@ const Projects = () => {
       title: 'Binaural Sound System',
       description: 'Binaural sound application with base and sweep frequency for mental alertness.',
       image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop',
-      tech: ['Typescript', 'Vite', 'Tailwind CSS', 'Postgres'],
+      tech: ['TypeScript', 'Vite', 'Tailwind CSS', 'Postgres'],
       github: 'https://github.com/Jaaystones/MindWave_v3',
       demo: 'https://mindwave-v3.onrender.com/'
     },
@@ -74,7 +74,7 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" ref={sectionRef} className="py-20 bg-slate-800/30">
+    <section id="projects" ref={sectionRef} className="py-20 bg-slate-100/50 dark:bg-slate-800/30">
       <div className="max-w-6xl mx-auto px-4">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
@@ -82,7 +82,7 @@ const Projects = () => {
             Featured Projects
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-400 mx-auto rounded-full"></div>
-          <p className="text-slate-400 mt-6 max-w-2xl mx-auto">
+          <p className="text-slate-600 dark:text-slate-400 mt-6 max-w-2xl mx-auto">
             A showcase of innovative solutions that demonstrate my expertise in full-stack development, cloud architecture, and data engineering.
           </p>
         </div>
@@ -91,7 +91,7 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`group relative bg-slate-900/50 rounded-xl overflow-hidden border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-500 hover:transform hover:scale-105 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              className={`group relative bg-white/90 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50 hover:border-cyan-500/50 transition-all duration-500 hover:transform hover:scale-105 shadow-lg backdrop-blur-sm ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                 }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
@@ -101,14 +101,14 @@ const Projects = () => {
                   alt={project.title}
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-60"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-transparent to-transparent opacity-60"></div>
               </div>
 
               <div className="p-6">
-                <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
+                <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-3 group-hover:text-cyan-500 transition-colors duration-300">
                   {project.title}
                 </h3>
-                <p className="text-slate-400 mb-4 text-sm leading-relaxed">
+                <p className="text-slate-700 dark:text-slate-400 mb-4 text-base leading-relaxed font-medium">
                   {project.description}
                 </p>
 
@@ -116,7 +116,7 @@ const Projects = () => {
                   {project.tech.map((tech, techIndex) => (
                     <span
                       key={techIndex}
-                      className="px-2 py-1 bg-slate-800 text-cyan-400 text-xs rounded-md border border-cyan-500/30"
+                      className="px-2 py-1 bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400 text-xs rounded-md border border-cyan-500/30"
                     >
                       {tech}
                     </span>
@@ -128,7 +128,7 @@ const Projects = () => {
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-slate-400 hover:text-cyan-400 transition-colors duration-300"
+                    className="flex items-center space-x-2 text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors duration-300"
                   >
                     <GithubIcon className="w-4 h-4" />
                     <span className="text-sm">Code</span>
