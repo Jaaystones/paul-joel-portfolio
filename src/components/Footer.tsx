@@ -8,10 +8,10 @@ const Footer = () => {
             © {new Date().getFullYear()} Joel Osagie Paul. All rights reserved.
           </div>
           <div className="flex space-x-6">
-            <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300">
+            <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
               Privacy
             </a>
-            <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300">
+            <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
               Terms
             </a>
           </div>

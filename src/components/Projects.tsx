@@ -1,6 +1,71 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { GithubIcon } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './ui/card';
+
+type Project = {
+  title: string;
+  description: string;
+  image: string;
+  tech: string[];
+  github?: string;
+  demo?: string;
+};
+
+const normalizeExternalUrl = (url?: string) => {
+  if (!url) return undefined;
+  return url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`;
+};
+
+const PROJECTS: Project[] = [
+  {
+    title: 'Sugar Queen Bead Business',
+    description: 'Landing page for the Sugar Queen bead business',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop',
+    tech: ['React', 'Next.js', 'Docker', 'Tailwind CSS'],
+    github: 'https://github.com/Jaaystones/sugar-queen-landing-page',
+    demo: 'https://sugar-queen-landing-page.onrender.com'
+  },
+  {
+    title: 'Real-time Data Analytics Platform',
+    description: 'Built a scalable data processing pipeline handling 1M+ events daily, with real-time dashboards and predictive analytics capabilities.',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+    tech: ['TypeScript', 'Apache Kafka', 'PostgreSQL', 'Next.js'],
+    github: 'https://github.com/Jaaystones/type_script_projects',
+    demo: 'https://type-script-projects-yc93.vercel.app/'
+  },
+  {
+    title: 'Microservices E-commerce API',
+    description: 'Developed a robust microservices architecture for e-commerce, featuring user management, Search, Media, and Posting processes.',
+    image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop',
+    tech: ['Node.js', 'Express', 'MongoDB', 'Redis'],
+    github: 'https://github.com/Jaaystones/social_media_microservice'
+  },
+  {
+    title: 'Personalised Note App for Small Businesses',
+    description: 'This is a note application for communication between business owners and employees.',
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop',
+    tech: ['Node.js', 'Redux', 'Postgres', 'React'],
+    github: 'https://github.com/Jaaystones/Note-API',
+    demo: 'https://stonegrowth.onrender.com/'
+  },
+  {
+    title: 'Binaural Sound System',
+    description: 'Binaural sound application with base and sweep frequency for mental alertness.',
+    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop',
+    tech: ['TypeScript', 'Vite', 'Tailwind CSS', 'Postgres'],
+    github: 'https://github.com/Jaaystones/MindWave_v3',
+    demo: 'https://mindwave-v3.onrender.com/'
+  },
+  {
+    title: 'Eventnoire Event Platform',
+    description: 'High-performance AI event scheduling system with load balancing, fault tolerance, and horizontal scaling capabilities.',
+    image: '/event-noire.png',
+    tech: ['Typescript', 'Redis', 'PostgreSQL', 'Docker'],
+    github: undefined,
+    demo: 'www.eventnoire.com'
+  }
+];
 
 const Projects = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -23,58 +88,8 @@ const Projects = () => {
     return () => observer.disconnect();
   }, []);
 
-  const projects = [
-    {
-      title: 'Sugar Queen Bead Business',
-      description: 'Landing page for the Sugar Queen bead business',
-      image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop',
-      tech: ['React', 'Next.js', 'Docker', 'Tailwind CSS'],
-      github: 'https://github.com/Jaaystones/sugar-queen-landing-page',
-      demo: 'https://sugar-queen-landing-page.onrender.com'
-    },
-    {
-      title: 'Real-time Data Analytics Platform',
-      description: 'Built a scalable data processing pipeline handling 1M+ events daily, with real-time dashboards and predictive analytics capabilities.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
-      tech: ['TypeScript', 'Apache Kafka', 'PostgreSQL', 'Next.js'],
-      github: 'https://github.com/Jaaystones/type_script_projects',
-      demo: 'https://type-script-projects-yc93.vercel.app/'
-    },
-    {
-      title: 'Microservices E-commerce API',
-      description: 'Developed a robust microservices architecture for e-commerce, featuring user management, Search, Media, and Posting processes.',
-      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop',
-      tech: ['Node.js', 'Express', 'MongoDB', 'Redis'],
-      github: 'https://github.com/Jaaystones/social_media_microservice'
-    },
-    {
-      title: 'Personalised Note App for Small Businesses',
-      description: 'This is a note application for communication between business owners and employees.',
-      image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop',
-      tech: ['Node.js', 'Redux', 'Postgres', 'React'],
-      github: 'https://github.com/Jaaystones/Note-API',
-      demo: 'https://stonegrowth.onrender.com/'
-    },
-    {
-      title: 'Binaural Sound System',
-      description: 'Binaural sound application with base and sweep frequency for mental alertness.',
-      image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop',
-      tech: ['TypeScript', 'Vite', 'Tailwind CSS', 'Postgres'],
-      github: 'https://github.com/Jaaystones/MindWave_v3',
-      demo: 'https://mindwave-v3.onrender.com/'
-    },
-    {
-      title: 'Distributed Task Scheduler',
-      description: 'High-performance task scheduling system with load balancing, fault tolerance, and horizontal scaling capabilities.',
-      image: 'https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=800&h=600&fit=crop',
-      tech: ['Go', 'Redis', 'PostgreSQL', 'Docker'],
-      github: '#',
-      demo: '#'
-    }
-  ];
-
   return (
-    <section id="projects" ref={sectionRef} className="py-20 bg-slate-100/50 dark:bg-slate-800/30">
+    <section id="projects" ref={sectionRef} tabIndex={-1} className="py-20 bg-slate-100/50 dark:bg-slate-800/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
       <div className="max-w-6xl mx-auto px-4">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
@@ -88,30 +103,44 @@ const Projects = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <div
+          {PROJECTS.map((project, index) => {
+            const demoUrl = normalizeExternalUrl(project.demo);
+
+            return (
+            <Card
               key={index}
-              className={`group relative bg-white/90 dark:bg-slate-900/50 rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700/50 hover:border-cyan-500/50 transition-all duration-500 hover:transform hover:scale-105 shadow-lg backdrop-blur-sm ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                }`}
+              className={`group relative overflow-hidden hover:border-cyan-500/50 transition-all duration-300 motion-safe:hover:scale-[1.02] shadow-lg backdrop-blur-sm ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div className="relative h-48 overflow-hidden">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  width={800}
+                  height={600}
+                  loading="lazy"
+                  decoding="async"
+                  fetchPriority="low"
+                  onError={(event) => {
+                    const img = event.currentTarget;
+                    if (!img.dataset.fallbackApplied) {
+                      img.src = '/placeholder.svg';
+                      img.dataset.fallbackApplied = 'true';
+                    }
+                  }}
+                  className="w-full h-full object-cover transition-transform duration-300 motion-safe:group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-slate-900 via-transparent to-transparent opacity-60"></div>
               </div>
-
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-slate-800 dark:text-white mb-3 group-hover:text-cyan-500 transition-colors duration-300">
+              <CardHeader className="pb-0">
+                <CardTitle className="text-xl font-bold text-slate-800 dark:text-white mb-3 group-hover:text-cyan-500 transition-colors duration-300">
                   {project.title}
-                </h3>
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-4">
                 <p className="text-slate-700 dark:text-slate-400 mb-4 text-base leading-relaxed font-medium">
                   {project.description}
                 </p>
-
                 <div className="flex flex-wrap gap-2 mb-4">
                   {project.tech.map((tech, techIndex) => (
                     <span
@@ -122,29 +151,42 @@ const Projects = () => {
                     </span>
                   ))}
                 </div>
-
-                <div className="flex justify-between items-center">
+              </CardContent>
+              <CardFooter className="flex justify-between items-center pt-0">
+                {project.github ? (
                   <a
                     href={project.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center space-x-2 text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors duration-300"
+                    className="flex items-center space-x-2 text-slate-600 dark:text-slate-400 hover:text-cyan-500 transition-colors duration-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                   >
                     <GithubIcon className="w-4 h-4" />
                     <span className="text-sm">Code</span>
                   </a>
+                ) : (
+                  <span className="flex items-center space-x-2 text-slate-400 dark:text-slate-500" aria-label="Code link unavailable">
+                    <GithubIcon className="w-4 h-4" />
+                    <span className="text-sm">Code N/A</span>
+                  </span>
+                )}
+                {demoUrl ? (
                   <a
-                    href={project.demo}
+                    href={demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300"
+                    className="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                   >
                     Live Demo
                   </a>
-                </div>
-              </div>
-            </div>
-          ))}
+                ) : (
+                  <span className="px-4 py-2 rounded-lg text-sm font-semibold text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-slate-800">
+                    Demo N/A
+                  </span>
+                )}
+              </CardFooter>
+            </Card>
+            );
+          })}
         </div>
       </div>
     </section>

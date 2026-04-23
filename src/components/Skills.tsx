@@ -1,6 +1,31 @@
 
 import { useEffect, useRef, useState } from 'react';
 
+type SkillLevel = 'Expert' | 'Intermediate' | 'Beginner';
+
+type Skill = {
+  name: string;
+  level: SkillLevel;
+  color: string;
+};
+
+type SkillCategory = {
+  title: string;
+  skills: Skill[];
+};
+
+const SKILL_LEVEL_WIDTH_CLASS: Record<SkillLevel, string> = {
+  Expert: 'w-5/6',
+  Intermediate: 'w-3/5',
+  Beginner: 'w-2/5',
+};
+
+const SKILL_LEVEL_WIDTH_PERCENT: Record<SkillLevel, string> = {
+  Expert: '83.333333%',
+  Intermediate: '60%',
+  Beginner: '40%',
+};
+
 const Skills = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -22,7 +47,7 @@ const Skills = () => {
     return () => observer.disconnect();
   }, []);
 
-  const skillCategories = [
+  const skillCategories: SkillCategory[] = [
     {
       title: 'Programming Languages',
       skills: [
@@ -61,17 +86,12 @@ const Skills = () => {
     }
   ];
 
-  const getLevelWidth = (level: string) => {
-    switch (level) {
-      case 'Expert': return 'w-5/6';
-      case 'Intermediate': return 'w-3/5';
-      case 'Beginner': return 'w-2/5';
-      default: return 'w-1/2';
-    }
-  };
+  const getLevelWidthClass = (level: SkillLevel) => SKILL_LEVEL_WIDTH_CLASS[level];
+
+  const getLevelWidthPercent = (level: SkillLevel) => SKILL_LEVEL_WIDTH_PERCENT[level];
 
   return (
-    <section id="skills" ref={sectionRef} className="py-20 bg-slate-50 dark:bg-slate-900">
+    <section id="skills" ref={sectionRef} tabIndex={-1} className="py-20 bg-slate-50 dark:bg-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
       <div className="max-w-6xl mx-auto px-4">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
@@ -100,12 +120,10 @@ const Skills = () => {
                       </div>
                       <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
                         <div
-                          className={`h-full bg-gradient-to-r ${skill.color} ${getLevelWidth(skill.level)} transition-all duration-1000 ease-out rounded-full`}
+                          className={`h-full bg-gradient-to-r ${skill.color} ${getLevelWidthClass(skill.level)} transition-all duration-1000 ease-out rounded-full`}
                           style={{
                             transitionDelay: `${(categoryIndex * 200) + (skillIndex * 100)}ms`,
-                            width: isVisible ? getLevelWidth(skill.level).replace('w-', '') === '5/6' ? '83.333333%' :
-                              getLevelWidth(skill.level).replace('w-', '') === '3/5' ? '60%' :
-                                getLevelWidth(skill.level).replace('w-', '') === '2/5' ? '40%' : '50%' : '0%'
+                            width: isVisible ? getLevelWidthPercent(skill.level) : '0%'
                           }}
                         ></div>
                       </div>

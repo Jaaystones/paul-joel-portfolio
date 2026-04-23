@@ -7,24 +7,24 @@ const Hero = () => {
   };
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white via-slate-100 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+    <section id="home" tabIndex={-1} className="min-h-screen flex items-center justify-center relative overflow-hidden bg-gradient-to-br from-white via-slate-100 to-white dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
       {/* Animated background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-500"></div>
+        <div className="absolute top-1/4 left-1/4 w-80 h-80 bg-cyan-500/5 dark:bg-cyan-500/10 rounded-full blur-2xl motion-safe:animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-blue-500/5 dark:bg-blue-500/10 rounded-full blur-2xl motion-safe:animate-pulse motion-safe:delay-1000"></div>
+        <div className="hidden md:block absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/5 dark:bg-purple-500/10 rounded-full blur-2xl motion-safe:animate-pulse motion-safe:delay-500"></div>
       </div>
 
       {/* Floating code elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-20 text-cyan-600/20 dark:text-cyan-400/20 text-sm font-mono animate-float">const developer = 'Joel';</div>
-        <div className="absolute top-40 right-32 text-blue-600/20 dark:text-blue-400/20 text-sm font-mono animate-float delay-300">console.log('Building the future');</div>
-        <div className="absolute bottom-32 left-16 text-purple-600/20 dark:text-purple-400/20 text-sm font-mono animate-float delay-700">function innovate() {'{'}return magic;{'}'}</div>
-        <div className="absolute bottom-40 right-20 text-cyan-600/20 dark:text-cyan-400/20 text-sm font-mono animate-float delay-1000">// Code that changes the world</div>
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
+        <div className="absolute top-20 left-20 text-cyan-600/20 dark:text-cyan-400/20 text-sm font-mono motion-safe:animate-float">const developer = 'Joel';</div>
+        <div className="absolute top-40 right-32 text-blue-600/20 dark:text-blue-400/20 text-sm font-mono motion-safe:animate-float motion-safe:delay-300">console.log('Building the future');</div>
+        <div className="absolute bottom-32 left-16 text-purple-600/20 dark:text-purple-400/20 text-sm font-mono motion-safe:animate-float motion-safe:delay-700">function innovate() {'{'}return magic;{'}'}</div>
+        <div className="absolute bottom-40 right-20 text-cyan-600/20 dark:text-cyan-400/20 text-sm font-mono motion-safe:animate-float motion-safe:delay-1000">// Code that changes the world</div>
       </div>
 
       <div className="text-center z-10 max-w-4xl mx-auto px-4">
-        <div className="animate-fade-in">
+        <div className="motion-safe:animate-fade-in">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-600 via-blue-600 to-purple-600 dark:from-cyan-400 dark:via-blue-400 dark:to-purple-400 bg-clip-text text-transparent">
             Hi, I'm Paul Joel
           </h1>
@@ -36,14 +36,14 @@ const Hero = () => {
           </p>
           <button
             onClick={() => scrollToSection('projects')}
-            className="bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-500 dark:to-blue-500 hover:from-cyan-700 hover:to-blue-700 dark:hover:from-cyan-600 dark:hover:to-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-cyan-500/25"
+            className="bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-500 dark:to-blue-500 hover:from-cyan-700 hover:to-blue-700 dark:hover:from-cyan-600 dark:hover:to-blue-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all duration-300 motion-safe:transform motion-safe:hover:scale-105 hover:shadow-xl shadow-cyan-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
           >
             Explore My Work
           </button>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 motion-safe:animate-bounce">
         <ChevronDown className="text-slate-600 dark:text-slate-400 w-6 h-6" />
       </div>
     </section>

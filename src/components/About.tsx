@@ -1,6 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import profileImg from '../assets/profile.jpg'; // ✅ Use your image file name here
 
+type Quality = {
+  title: string;
+  icon: string;
+};
+
 const About = () => {
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
@@ -22,14 +27,14 @@ const About = () => {
     return () => observer.disconnect();
   }, []);
 
-  const qualities = [
+  const qualities: Quality[] = [
     { title: 'Innovative Thinker', icon: '💡' },
     { title: 'Problem Solver', icon: '🔧' },
     { title: 'Team Player', icon: '🤝' },
   ];
 
   return (
-    <section id="about" ref={sectionRef} className="py-20 bg-white dark:bg-slate-800/50 transition-colors duration-300">
+    <section id="about" ref={sectionRef} tabIndex={-1} className="py-20 bg-white dark:bg-slate-800/50 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
       <div className="max-w-6xl mx-auto px-4">
         <div
           className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
@@ -52,6 +57,8 @@ const About = () => {
                   <img
                     src={profileImg}
                     alt="Profile"
+                    loading="lazy"
+                    decoding="async"
                     className="rounded-full w-64 h-64 object-cover shadow-lg"
                   />
                 </div>
@@ -89,7 +96,7 @@ const About = () => {
               href="/Paul_Osagie_Joel_Software_Engineering.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-600 dark:to-blue-600 hover:from-cyan-700 hover:to-blue-700 dark:hover:from-cyan-700 dark:hover:to-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 inline-block text-center"
+              className="bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-600 dark:to-blue-600 hover:from-cyan-700 hover:to-blue-700 dark:hover:from-cyan-700 dark:hover:to-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 inline-block text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
             >
               Download Resume
             </a>

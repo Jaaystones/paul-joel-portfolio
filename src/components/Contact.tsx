@@ -1,16 +1,31 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { Mail, Github, Linkedin } from 'lucide-react';
+import { Mail, Github, Linkedin, type LucideIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+
+type ContactFormData = {
+  name: string;
+  email: string;
+  message: string;
+};
+
+type ContactFormErrors = Partial<Record<keyof ContactFormData, string>>;
+
+type SocialLink = {
+  icon: LucideIcon;
+  href: string;
+  target: '_blank' | '_self';
+  label: string;
+};
 
 const Contact = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: '',
     email: '',
     message: ''
   });
-  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [errors, setErrors] = useState<ContactFormErrors>({});
   const sectionRef = useRef<HTMLElement>(null);
   const { toast } = useToast();
 
@@ -32,7 +47,7 @@ const Contact = () => {
   }, []);
 
   const validateForm = () => {
-    const newErrors: { [key: string]: string } = {};
+    const newErrors: ContactFormErrors = {};
 
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     if (!formData.email.trim()) {
@@ -73,20 +88,22 @@ const Contact = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
+    const field = name as keyof ContactFormData;
+
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => ({ ...prev, [field]: '' }));
     }
   };
 
-  const socialLinks = [
+  const socialLinks: SocialLink[] = [
     { icon: Mail, href: 'mailto:Joelpaul345@gmail.com', target: '_blank', label: 'Email' },
     { icon: Github, href: 'https://github.com/Jaaystones', target: '_blank', label: 'GitHub' },
     { icon: Linkedin, href: 'https://linkedin.com/in/paul-joel-osagie', target: '_blank', label: 'LinkedIn' },
   ];
 
   return (
-    <section id="contact" ref={sectionRef} className="py-20 bg-slate-100 dark:bg-slate-900 transition-colors duration-300">
+    <section id="contact" ref={sectionRef} tabIndex={-1} className="py-20 bg-slate-100 dark:bg-slate-900 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
       <div className="max-w-4xl mx-auto px-4">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
@@ -114,7 +131,7 @@ const Contact = () => {
                   href={link.href}
                   target={link.target}
                   rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
-                  className="flex items-center space-x-4 p-4 bg-white/80 dark:bg-slate-800/50 rounded-lg border border-slate-300 dark:border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 group backdrop-blur-sm"
+                  className="flex items-center space-x-4 p-4 bg-white/80 dark:bg-slate-800/50 rounded-lg border border-slate-300 dark:border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 group backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
                 >
                   <link.icon className="w-6 h-6 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
                   <span className="text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-300">
@@ -135,10 +152,12 @@ const Contact = () => {
                   placeholder="Your Name"
                   value={formData.name}
                   onChange={handleChange}
+                  aria-invalid={Boolean(errors.name)}
+                  aria-describedby={errors.name ? 'name-error' : undefined}
                   className={`w-full p-4 bg-white/80 dark:bg-slate-800/50 border rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 backdrop-blur-sm ${errors.name ? 'border-red-500' : 'border-slate-300 dark:border-slate-700/50'
                     }`}
                 />
-                {errors.name && <p className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.name}</p>}
+                {errors.name && <p id="name-error" className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.name}</p>}
               </div>
 
               <div>
@@ -148,10 +167,12 @@ const Contact = () => {
                   placeholder="Your Email"
                   value={formData.email}
                   onChange={handleChange}
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
                   className={`w-full p-4 bg-white/80 dark:bg-slate-800/50 border rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 backdrop-blur-sm ${errors.email ? 'border-red-500' : 'border-slate-300 dark:border-slate-700/50'
                     }`}
                 />
-                {errors.email && <p className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.email}</p>}
+                {errors.email && <p id="email-error" className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.email}</p>}
               </div>
 
               <div>
@@ -161,15 +182,17 @@ const Contact = () => {
                   rows={6}
                   value={formData.message}
                   onChange={handleChange}
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={errors.message ? 'message-error' : undefined}
                   className={`w-full p-4 bg-white/80 dark:bg-slate-800/50 border rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 resize-none backdrop-blur-sm ${errors.message ? 'border-red-500' : 'border-slate-300 dark:border-slate-700/50'
                     }`}
                 ></textarea>
-                {errors.message && <p className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.message}</p>}
+                {errors.message && <p id="message-error" className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.message}</p>}
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-500 dark:to-blue-500 hover:from-cyan-700 hover:to-blue-700 dark:hover:from-cyan-600 dark:hover:to-blue-600 text-white py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-cyan-500/25"
+                className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-500 dark:to-blue-500 hover:from-cyan-700 hover:to-blue-700 dark:hover:from-cyan-600 dark:hover:to-blue-600 text-white py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-cyan-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
               >
                 Send Message
               </button>
