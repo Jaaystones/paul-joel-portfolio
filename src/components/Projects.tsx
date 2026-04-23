@@ -27,12 +27,12 @@ const PROJECTS: Project[] = [
     demo: 'https://sugar-queen-landing-page.onrender.com'
   },
   {
-    title: 'Real-time Data Analytics Platform',
+    title: 'E Africa Website',
     description: 'Built a scalable data processing pipeline handling 1M+ events daily, with real-time dashboards and predictive analytics capabilities.',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop',
+    image: 'public/E-africa.png',
     tech: ['TypeScript', 'Apache Kafka', 'PostgreSQL', 'Next.js'],
-    github: 'https://github.com/Jaaystones/type_script_projects',
-    demo: 'https://type-script-projects-yc93.vercel.app/'
+    github: 'https://github.com/Jaaystones/enterprise-ui',
+    demo: 'https://www.hireeafrica.com/'
   },
   {
     title: 'Microservices E-commerce API',
