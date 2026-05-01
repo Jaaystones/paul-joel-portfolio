@@ -35,11 +35,11 @@ const PROJECTS: Project[] = [
     demo: 'https://www.hireeafrica.com/'
   },
   {
-    title: 'Microservices E-commerce API',
-    description: 'Developed a robust microservices architecture for e-commerce, featuring user management, Search, Media, and Posting processes.',
+    title: 'Spotter Logistics',
+    description: 'Developed a robust application for logistics management.',
     image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop',
-    tech: ['Node.js', 'Express', 'MongoDB', 'Redis'],
-    github: 'https://github.com/Jaaystones/social_media_microservice'
+    tech: ['Django', 'React', 'PostgreSQL', 'Redis'],
+    github: 'https://github.com/Jaaystones/spotter_api'
   },
   {
     title: 'Personalised Note App for Small Businesses',
