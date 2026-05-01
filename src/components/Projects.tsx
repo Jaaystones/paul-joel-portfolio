@@ -39,7 +39,8 @@ const PROJECTS: Project[] = [
     description: 'Developed a robust application for logistics management.',
     image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop',
     tech: ['Django', 'React', 'PostgreSQL', 'Redis'],
-    github: 'https://github.com/Jaaystones/spotter_api'
+    github: 'https://github.com/Jaaystones/spotter_api',
+    demo: 'https://spotter-client.onrender.com/'
   },
   {
     title: 'Personalised Note App for Small Businesses',
