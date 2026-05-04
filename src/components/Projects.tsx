@@ -32,7 +32,7 @@ const PROJECTS: Project[] = [
     image: 'public/E-africa.png',
     tech: ['TypeScript', 'Apache Kafka', 'PostgreSQL', 'Next.js'],
     github: 'https://github.com/Jaaystones/enterprise-ui',
-    demo: 'https://www.hireeafrica.com/'
+    demo: 'https://www.eafricaservices.com/'
   },
   {
     title: 'Spotter Logistics',
