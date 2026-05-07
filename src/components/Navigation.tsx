@@ -64,7 +64,7 @@ const Navigation = () => {
           <button
             type="button"
             onClick={() => scrollToSection('home')}
-            className="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950"
+            className="text-2xl font-bold bg-gradient-to-r from-sky-400 to-indigo-400 bg-clip-text text-transparent rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950"
             aria-label="Go to Home section"
           >
             Paul Osagie Joel.dev
@@ -77,9 +77,9 @@ const Navigation = () => {
                   type="button"
                   onClick={() => scrollToSection(item.id)}
                   aria-current={activeSection === item.id ? 'page' : undefined}
-                  className={`transition-colors duration-200 font-medium rounded-md px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950 ${activeSection === item.id
+                    className={`transition-colors duration-200 font-medium rounded-md px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950 ${activeSection === item.id
                       ? 'text-cyan-600 dark:text-cyan-400'
-                      : 'text-slate-700 dark:text-slate-300 hover:text-cyan-600 dark:hover:text-cyan-400'
+                      : 'text-slate-300 hover:text-sky-200 dark:text-slate-300 dark:hover:text-sky-200'
                     }`}
                 >
                   {item.label}

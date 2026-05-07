@@ -98,7 +98,12 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-slate-950 text-slate-100;
+    background:
+      radial-gradient(circle at top, rgba(34, 211, 238, 0.14), transparent 28%),
+      radial-gradient(circle at bottom right, rgba(59, 130, 246, 0.1), transparent 24%),
+      linear-gradient(to bottom, #050816, #020617 55%, #020617);
+    background-attachment: fixed;
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 }

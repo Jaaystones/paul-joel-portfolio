@@ -1,17 +1,17 @@
 
 const Footer = () => {
   return (
-    <footer className="bg-slate-950 py-8 border-t border-slate-800">
+    <footer className="bg-slate-950 py-8 border-t border-white/5">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="text-slate-400 mb-4 md:mb-0">
             © {new Date().getFullYear()} Joel Osagie Paul. All rights reserved.
           </div>
           <div className="flex space-x-6">
-            <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
+            <a href="#" className="text-slate-400 hover:text-sky-300 transition-colors duration-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
               Privacy
             </a>
-            <a href="#" className="text-slate-400 hover:text-cyan-400 transition-colors duration-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
+            <a href="#" className="text-slate-400 hover:text-sky-300 transition-colors duration-300 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
               Terms
             </a>
           </div>

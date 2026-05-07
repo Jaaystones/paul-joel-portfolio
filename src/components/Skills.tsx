@@ -91,14 +91,14 @@ const Skills = () => {
   const getLevelWidthPercent = (level: SkillLevel) => SKILL_LEVEL_WIDTH_PERCENT[level];
 
   return (
-    <section id="skills" ref={sectionRef} tabIndex={-1} className="py-20 bg-slate-50 dark:bg-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
+    <section id="skills" ref={sectionRef} tabIndex={-1} className="py-20 bg-[linear-gradient(to_bottom,_rgba(15,23,42,0.92),_rgba(2,6,23,0.95))] focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
       <div className="max-w-6xl mx-auto px-4">
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-sky-200 to-indigo-200 bg-clip-text text-transparent">
             Skills & Expertise
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-400 mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-sky-400 to-indigo-400 mx-auto rounded-full shadow-[0_0_18px_rgba(99,102,241,0.18)]"></div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -109,16 +109,16 @@ const Skills = () => {
                 }`}
               style={{ transitionDelay: `${categoryIndex * 200}ms` }}
             >
-              <div className="bg-white/80 dark:bg-slate-800/50 p-6 rounded-xl border border-slate-200 dark:border-slate-700/50 hover:border-cyan-500/30 transition-all duration-300 backdrop-blur-sm shadow-lg">
-                <h3 className="text-xl font-bold text-cyan-600 dark:text-cyan-400 mb-6">{category.title}</h3>
+              <div className="bg-slate-950/55 p-6 rounded-3xl border border-white/10 hover:border-sky-300/25 transition-all duration-300 backdrop-blur-xl shadow-[0_16px_50px_-24px_rgba(15,23,42,0.9)]">
+                <h3 className="text-xl font-bold text-sky-200 mb-6">{category.title}</h3>
                 <div className="space-y-4">
                   {category.skills.map((skill, skillIndex) => (
                     <div key={skillIndex} className="group">
                       <div className="flex justify-between items-center mb-2">
-                        <span className="text-slate-800 dark:text-white font-medium">{skill.name}</span>
-                        <span className="text-slate-600 dark:text-slate-400 text-sm">{skill.level}</span>
+                        <span className="text-slate-100 font-medium">{skill.name}</span>
+                        <span className="text-slate-400 text-sm">{skill.level}</span>
                       </div>
-                      <div className="w-full bg-slate-200 dark:bg-slate-700 rounded-full h-2 overflow-hidden">
+                      <div className="w-full bg-white/5 rounded-full h-2 overflow-hidden">
                         <div
                           className={`h-full bg-gradient-to-r ${skill.color} ${getLevelWidthClass(skill.level)} transition-all duration-1000 ease-out rounded-full`}
                           style={{

@@ -103,100 +103,105 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" ref={sectionRef} tabIndex={-1} className="py-20 bg-slate-100 dark:bg-slate-900 transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+    <section id="contact" ref={sectionRef} tabIndex={-1} className="py-20 bg-[linear-gradient(to_bottom,_rgba(2,6,23,0.96),_rgba(15,23,42,0.98))] transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className={`mx-auto mb-16 max-w-3xl text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-black mb-4 bg-gradient-to-r from-sky-200 to-indigo-200 bg-clip-text text-transparent">
             Let's Connect
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-400 dark:to-blue-400 mx-auto rounded-full"></div>
-          <p className="text-slate-700 dark:text-slate-400 mt-6 text-lg">
-            Let's collaborate or talk tech! I'm always excited to discuss new opportunities and innovative projects.
+          <div className="w-24 h-1 bg-gradient-to-r from-sky-400 to-indigo-400 mx-auto rounded-full shadow-[0_0_18px_rgba(99,102,241,0.18)]"></div>
+          <p className="mt-6 text-lg leading-8 text-slate-400">
+            Let's collaborate or talk tech. I am always open to new opportunities and thoughtful projects.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-12">
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] items-stretch">
           <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
             }`}>
-            <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-6">Get in Touch</h3>
-            <p className="text-slate-700 dark:text-slate-400 mb-8 leading-relaxed">
-              Whether you have a project in mind, want to discuss technology, or simply want to connect, I'd love to hear from you. Let's build something amazing together!
-            </p>
+            <div className="h-full rounded-3xl border border-white/10 bg-slate-950/55 p-6 shadow-[0_20px_70px_-30px_rgba(15,23,42,0.8)] backdrop-blur-xl">
+              <h3 className="text-2xl font-bold text-white mb-6">Get in Touch</h3>
+              <p className="text-slate-300 mb-8 leading-relaxed">
+                Whether you have a project in mind, want to discuss technology, or simply want to connect, I would love to hear from you.
+              </p>
 
-            <div className="space-y-4">
-              {socialLinks.map((link, index) => (
-                <a
-                  key={index}
-                  href={link.href}
-                  target={link.target}
-                  rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
-                  className="flex items-center space-x-4 p-4 bg-white/80 dark:bg-slate-800/50 rounded-lg border border-slate-300 dark:border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 group backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
-                >
-                  <link.icon className="w-6 h-6 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform duration-300" />
-                  <span className="text-slate-700 dark:text-slate-300 group-hover:text-slate-900 dark:group-hover:text-white transition-colors duration-300">
-                    {link.label}
-                  </span>
-                </a>
-              ))}
+              <div className="space-y-4">
+                {socialLinks.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.href}
+                    target={link.target}
+                    rel={link.target === '_blank' ? 'noopener noreferrer' : undefined}
+                    className="flex items-center space-x-4 p-4 bg-white/5 rounded-2xl border border-white/10 hover:border-sky-300/30 transition-all duration-300 group backdrop-blur-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                  >
+                    <link.icon className="w-6 h-6 text-sky-200 group-hover:scale-110 transition-transform duration-300" />
+                    <span className="text-slate-300 group-hover:text-white transition-colors duration-300">
+                      {link.label}
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
 
           <div className={`transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
             }`}>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  aria-invalid={Boolean(errors.name)}
-                  aria-describedby={errors.name ? 'name-error' : undefined}
-                  className={`w-full p-4 bg-white/80 dark:bg-slate-800/50 border rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 backdrop-blur-sm ${errors.name ? 'border-red-500' : 'border-slate-300 dark:border-slate-700/50'
-                    }`}
-                />
-                {errors.name && <p id="name-error" className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.name}</p>}
-              </div>
+            <div className="h-full rounded-3xl border border-white/10 bg-slate-950/55 p-6 shadow-[0_20px_70px_-30px_rgba(15,23,42,0.8)] backdrop-blur-xl">
+              <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? 'name-error' : undefined}
+                    className={`w-full p-4 bg-white/5 border rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-300 transition-all duration-300 backdrop-blur-sm ${errors.name ? 'border-red-500' : 'border-white/10'
+                      }`}
+                  />
+                  {errors.name && <p id="name-error" className="text-red-400 text-sm mt-1">{errors.name}</p>}
+                </div>
 
-              <div>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Your Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  aria-invalid={Boolean(errors.email)}
-                  aria-describedby={errors.email ? 'email-error' : undefined}
-                  className={`w-full p-4 bg-white/80 dark:bg-slate-800/50 border rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 backdrop-blur-sm ${errors.email ? 'border-red-500' : 'border-slate-300 dark:border-slate-700/50'
-                    }`}
-                />
-                {errors.email && <p id="email-error" className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.email}</p>}
-              </div>
+                <div>
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? 'email-error' : undefined}
+                    className={`w-full p-4 bg-white/5 border rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-300 transition-all duration-300 backdrop-blur-sm ${errors.email ? 'border-red-500' : 'border-white/10'
+                      }`}
+                  />
+                  {errors.email && <p id="email-error" className="text-red-400 text-sm mt-1">{errors.email}</p>}
+                </div>
 
-              <div>
-                <textarea
-                  name="message"
-                  placeholder="Your Message"
-                  rows={6}
-                  value={formData.message}
-                  onChange={handleChange}
-                  aria-invalid={Boolean(errors.message)}
-                  aria-describedby={errors.message ? 'message-error' : undefined}
-                  className={`w-full p-4 bg-white/80 dark:bg-slate-800/50 border rounded-lg text-slate-900 dark:text-white placeholder-slate-500 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all duration-300 resize-none backdrop-blur-sm ${errors.message ? 'border-red-500' : 'border-slate-300 dark:border-slate-700/50'
-                    }`}
-                ></textarea>
-                {errors.message && <p id="message-error" className="text-red-500 dark:text-red-400 text-sm mt-1">{errors.message}</p>}
-              </div>
+                <div>
+                  <textarea
+                    name="message"
+                    placeholder="Your Message"
+                    rows={6}
+                    value={formData.message}
+                    onChange={handleChange}
+                    aria-invalid={Boolean(errors.message)}
+                    aria-describedby={errors.message ? 'message-error' : undefined}
+                    className={`w-full p-4 bg-white/5 border rounded-2xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-300 transition-all duration-300 resize-none backdrop-blur-sm ${errors.message ? 'border-red-500' : 'border-white/10'
+                      }`}
+                  ></textarea>
+                  {errors.message && <p id="message-error" className="text-red-400 text-sm mt-1">{errors.message}</p>}
+                </div>
 
-              <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-cyan-600 to-blue-600 dark:from-cyan-500 dark:to-blue-500 hover:from-cyan-700 hover:to-blue-700 dark:hover:from-cyan-600 dark:hover:to-blue-600 text-white py-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl shadow-cyan-500/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
-              >
-                Send Message
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-sky-400 to-indigo-400 text-slate-950 py-4 rounded-full font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-[0_18px_50px_-18px_rgba(99,102,241,0.28)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
