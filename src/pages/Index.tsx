@@ -2,8 +2,8 @@
 import { Suspense, lazy } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import Hero from '@/components/Hero';
 
-const Hero = lazy(() => import('@/components/Hero'));
 const About = lazy(() => import('@/components/About'));
 const Skills = lazy(() => import('@/components/Skills'));
 const Projects = lazy(() => import('@/components/Projects'));
@@ -20,8 +20,8 @@ const Index = () => {
       </a>
       <Navigation />
       <main id="main-content" tabIndex={-1} className="focus:outline-none">
+        <Hero />
         <Suspense fallback={<div className="py-24 text-center text-slate-600 dark:text-slate-400">Loading content...</div>}>
-          <Hero />
           <About />
           <Skills />
           <Projects />
