@@ -1,9 +1,7 @@
-
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
-import { ArrowUpRight, GithubIcon, X } from 'lucide-react';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './ui/card';
-import { Button } from './ui/button';
+import { lazy, Suspense, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight, Monitor } from 'lucide-react';
+import FadeUp from './ui/FadeUp';
 
 const ProjectDetailDialog = lazy(() => import('./ProjectDetailDialog.tsx'));
 
@@ -17,270 +15,306 @@ type Project = {
   demo?: string;
 };
 
-const normalizeExternalUrl = (url?: string) => {
-  if (!url) return undefined;
-  return url.startsWith('http://') || url.startsWith('https://') ? url : `https://${url}`;
+const normalizeUrl = (url?: string): string | undefined => {
+  if (!url || url === 'undefined') return undefined;
+  return url.startsWith('http://') || url.startsWith('https://')
+    ? url
+    : `https://${url}`;
 };
-
-const projectCountLabel = (count: number) => `${count.toString().padStart(2, '0')} projects`;
 
 const PROJECTS: Project[] = [
   {
     title: 'Sugar Queen Bead Business',
-    description: 'Landing page for the Sugar Queen bead business',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=600&fit=crop',
+    description:
+      'E-commerce landing page for Sugar Queen, a handcrafted bead business. Focused on brand storytelling, product showcase, and conversion-optimised layout.',
+    image:
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=800&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=800&fit=crop',
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1200&h=800&fit=crop'
+      'https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1200&h=800&fit=crop',
     ],
     tech: ['React', 'Next.js', 'Docker', 'Tailwind CSS'],
     github: 'https://github.com/Jaaystones/sugar-queen-landing-page',
-    demo: 'https://sugar-queen-landing-page.onrender.com'
+    demo: 'https://sugar-queen-landing-page.onrender.com',
   },
   {
     title: 'E Africa Website',
-    description: 'Built a scalable data processing pipeline handling 1M+ events daily, with real-time dashboards and predictive analytics capabilities.',
-    image: 'E-africa.png',
+    description:
+      'Corporate website for E Africa Services — a pan-African digital solutions firm. Includes service listings, case studies, and a contact pipeline.',
+    image: 'e-africa copy.png',
     gallery: [
-      'E-africa.png',
+      'e-africa copy.png',
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop'
+      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=800&fit=crop',
     ],
-    tech: ['TypeScript', 'Apache Kafka', 'PostgreSQL', 'Next.js'],
+    tech: ['TypeScript', 'Next.js', 'PostgreSQL', 'Apache Kafka'],
     github: 'https://github.com/Jaaystones/enterprise-ui',
-    demo: 'https://www.eafricaservices.com/'
+    demo: 'https://www.eafricaservices.com/',
   },
   {
     title: 'Spotter Logistics',
-    description: 'Developed a robust application for Truck logistics management.',
-    image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop',
+    description:
+      'Full-stack truck logistics management platform. Drivers, dispatchers, and admins each get tailored dashboards with real-time load tracking.',
+    image:
+      'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&h=800&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=1200&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1521102765830-7e0f4c0a8a9d?w=1200&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&h=800&fit=crop'
+      'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200&h=800&fit=crop',
     ],
     tech: ['Django', 'React', 'Python', 'PostgreSQL', 'Redis'],
     github: 'https://github.com/Jaaystones/spotter_api',
-    demo: 'https://spotter-client.onrender.com/'
+    demo: 'https://spotter-client.onrender.com/',
   },
   {
-    title: 'Personalised Note App for Small Businesses',
-    description: 'This is a note application for communication between business owners and employees.',
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop',
+    title: 'Iriju Alufaa',
+    description:
+      'AI-powered pastor assistant that renders Bible passages with rich contextual captions and automatically formats sermon graphics for social media.',
+    image: 'iriju.png',
     gallery: [
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=1200&h=800&fit=crop',
+      'iriju.png',
       'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=800&fit=crop'
+      'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1200&h=800&fit=crop',
     ],
-    tech: ['Node.js', 'Redux', 'Postgres', 'React'],
-    github: 'https://github.com/Jaaystones/Note-API',
-    demo: 'https://stonegrowth.onrender.com/'
+    tech: ['FastAPI', 'React', 'Python', 'PostgreSQL'],
+    // Private repo — linking to org profile instead
+    github: 'https://github.com/Jaaystones',
+    demo: 'https://www.irijuai.com/',
   },
   {
-    title: 'GosPool APP',
-    description: 'A rider sharing Platform for Church membership.',
-    image: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=600&fit=crop',
+    title: 'GosPool App',
+    description:
+      'Ride-sharing platform built specifically for church communities. Members can post, join, and manage carpools to services and events.',
+    image:
+      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=800&fit=crop',
     gallery: [
       'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&h=800&fit=crop',
       'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&h=800&fit=crop'
     ],
-    tech: ['TypeScript', 'Vite', 'Tailwind CSS', 'Postgres'],
+    tech: ['TypeScript', 'Vite', 'Tailwind CSS', 'PostgreSQL'],
     github: 'https://github.com/Jaaystones/MindWave_v3',
-    demo: 'https://www.gospool.com/'
+    demo: 'https://www.gospool.com/',
   },
   {
     title: 'Eventnoire Event Platform',
-    description: 'High-performance AI event scheduling system with load balancing, fault tolerance, and horizontal scaling capabilities.',
+    description:
+      'AI-assisted event scheduling and discovery platform for the Black community. Features intelligent venue matching and automated social promotion.',
     image: '/event-noire.png',
     gallery: [
       '/event-noire.png',
       'https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&h=800&fit=crop',
-      'https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200&h=800&fit=crop'
+      'https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200&h=800&fit=crop',
     ],
-    tech: ['Typescript', 'Redis', 'PostgreSQL', 'Docker'],
-    github: undefined,
-    demo: 'www.eventnoire.com'
-  }
+    tech: ['TypeScript', 'Redis', 'PostgreSQL', 'Docker'],
+    // Repo is private — linking to GitHub profile
+    github: 'https://github.com/Jaaystones',
+    demo: 'https://www.eventnoire.com',
+  },
 ];
 
+// Placeholder shown when a project image fails to load or is unavailable
+const MockupPlaceholder = () => (
+  <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-amber-500/15 via-slate-800 to-teal-500/15">
+    <Monitor className="w-16 h-16 text-amber-500/30" />
+  </div>
+);
+
+type ProjectRowProps = {
+  project: Project;
+  index: number;
+  onOpen: (p: Project) => void;
+  shouldReduce: boolean;
+};
+
+const ProjectRow = ({ project, index, onOpen, shouldReduce }: ProjectRowProps) => {
+  const [imgError, setImgError] = useState(false);
+  const isReversed = index % 2 === 1;
+  const demoUrl = normalizeUrl(project.demo);
+  const codeUrl = normalizeUrl(project.github);
+
+  return (
+    <FadeUp delay={0.05}>
+      <div
+        className={`group flex flex-col gap-6 lg:gap-16 lg:items-center ${
+          isReversed ? 'lg:flex-row-reverse' : 'lg:flex-row'
+        }`}
+      >
+        {/* ── Mockup ── */}
+        <motion.div
+          className="w-full lg:w-[52%] shrink-0 cursor-pointer max-w-xl mx-auto lg:max-w-none lg:mx-0"
+          whileHover={shouldReduce ? {} : { scale: 1.02 }}
+          transition={{ duration: 0.35, ease: 'easeOut' }}
+          onClick={() => onOpen(project)}
+          role="button"
+          tabIndex={0}
+          aria-label={`Open ${project.title} case study`}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              onOpen(project);
+            }
+          }}
+        >
+          <div className="relative aspect-[4/3] sm:aspect-video overflow-hidden rounded-xl sm:rounded-2xl border border-white/5 shadow-[0_24px_60px_-16px_rgba(0,0,0,0.6)] group-hover:border-amber-500/20 transition-colors duration-300">
+            {imgError ? (
+              <MockupPlaceholder />
+            ) : (
+              <img
+                src={project.image}
+                alt={`${project.title} mockup`}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                loading="lazy"
+                decoding="async"
+                onError={() => setImgError(true)}
+              />
+            )}
+            {/* Subtle gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent" />
+            {/* "Click to expand" hint on hover */}
+            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="px-4 py-2 rounded-full bg-slate-950/80 border border-amber-500/30 text-amber-300 text-xs font-medium tracking-wide backdrop-blur">
+                View case study
+              </span>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* ── Content ── */}
+        <div className="flex flex-col gap-5 lg:w-[48%]">
+          {/* Index number */}
+          <span className="font-mono text-xs text-amber-500/50 tracking-[0.2em]">
+            {String(index + 1).padStart(2, '0')}
+          </span>
+
+          {/* Title */}
+          <h3 className="text-3xl md:text-4xl font-black text-white leading-tight group-hover:text-amber-300 transition-colors duration-300">
+            {project.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-slate-400 leading-relaxed text-[0.95rem]">
+            {project.description}
+          </p>
+
+          {/* Tech stack */}
+          <div className="flex flex-wrap gap-2">
+            {project.tech.map((tag) => (
+              <span
+                key={tag}
+                className="font-mono text-[11px] text-teal-400 border border-teal-500/20 bg-teal-500/5 px-3 py-1 rounded-full tracking-wide"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Links */}
+          <div className="flex items-center gap-6 pt-1">
+            <button
+              onClick={() => onOpen(project)}
+              className="inline-flex items-center gap-1.5 text-sm font-medium text-amber-400 hover:text-amber-300 underline-offset-4 hover:underline transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-400 rounded"
+            >
+              Case Study <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
+
+            {demoUrl && (
+              <a
+                href={demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-teal-400 hover:text-teal-300 underline-offset-4 hover:underline transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-teal-400 rounded"
+              >
+                Live Demo <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            )}
+
+            {codeUrl && (
+              <a
+                href={codeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-slate-300 transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-400 rounded"
+              >
+                Code
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </FadeUp>
+  );
+};
+
 const Projects = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const shouldReduceMotion = useReducedMotion() ?? false;
+  const shouldReduce = useReducedMotion() ?? false;
 
   const openProject = (project: Project) => {
     setSelectedProject(project);
     setDialogOpen(true);
   };
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
   return (
-    <section id="projects" ref={sectionRef} tabIndex={-1} className="relative overflow-hidden py-24 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900">
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,0.18),_transparent_34%),radial-gradient(circle_at_top_right,_rgba(59,130,246,0.16),_transparent_28%),linear-gradient(to_bottom,_rgba(15,23,42,0.02),_transparent_40%)] dark:bg-[radial-gradient(circle_at_top_left,_rgba(34,211,238,0.14),_transparent_32%),radial-gradient(circle_at_top_right,_rgba(59,130,246,0.1),_transparent_28%),linear-gradient(to_bottom,_rgba(2,6,23,0.2),_transparent_40%)]" />
-      <div className="mx-auto max-w-6xl px-4">
-        <div className={`mx-auto mb-16 max-w-3xl text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="mb-5 inline-flex items-center gap-3 rounded-full border border-sky-500/15 bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.24em] text-sky-700 shadow-sm backdrop-blur dark:border-sky-300/15 dark:bg-slate-900/60 dark:text-sky-200">
-            <span className="h-2 w-2 rounded-full bg-sky-400" />
-            {projectCountLabel(PROJECTS.length)}
+    <section
+      id="projects"
+      tabIndex={-1}
+      className="relative py-28 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900"
+    >
+      {/* Section background tint */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(245,158,11,0.04),transparent_50%),radial-gradient(ellipse_at_bottom,rgba(20,184,166,0.04),transparent_50%)]"
+      />
+
+      <div className="mx-auto max-w-6xl px-6">
+        {/* Section header */}
+        <FadeUp>
+          <div className="mb-16 lg:mb-24 max-w-2xl">
+            <p className="font-mono text-xs text-amber-400/70 tracking-[0.3em] uppercase mb-4">
+              Selected Work — {String(PROJECTS.length).padStart(2, '0')} projects
+            </p>
+            <h2 className="text-5xl md:text-6xl font-black text-white tracking-tight mb-6">
+              Things I've{' '}
+              <span className="bg-gradient-to-r from-amber-400 to-teal-400 bg-clip-text text-transparent">
+                built.
+              </span>
+            </h2>
+            <p className="text-slate-400 text-base leading-relaxed">
+              A focused collection of production work — each project shaped for
+              real users, real constraints, and a high bar for quality.
+            </p>
           </div>
-          <h2 className="text-4xl font-black tracking-tight text-slate-900 md:text-6xl dark:text-white">
-            Featured Projects
-          </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-slate-600 dark:text-slate-400 md:text-lg">
-            A focused collection of production work, shaped for speed, clarity, and a high-end presentation layer.
-          </p>
-        </div>
+        </FadeUp>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {PROJECTS.map((project, index) => {
-            const demoUrl = normalizeExternalUrl(project.demo);
-            const itemDelay = index * 0.12;
-
-            return (
-            <motion.div
-              key={index}
-              initial={shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
-              whileHover={shouldReduceMotion ? {} : { scale: 1.02 }}
-              transition={{ duration: 0.45, delay: shouldReduceMotion ? 0 : itemDelay, ease: 'easeOut' }}
-              className="rounded-lg"
-            >
-              <Card
-                onClick={() => openProject(project)}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    openProject(project);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                aria-haspopup="dialog"
-                aria-label={`Open ${project.title} details`}
-                className="group relative flex h-full cursor-pointer flex-col overflow-hidden border border-white/60 bg-white/80 shadow-[0_12px_40px_-12px_rgba(15,23,42,0.18)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-sky-300/35 hover:shadow-[0_20px_60px_-18px_rgba(99,102,241,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 dark:border-white/5 dark:bg-slate-950/70 dark:hover:border-sky-300/25 dark:focus-visible:ring-offset-slate-900"
-              >
-              <div className="relative h-52 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  width={800}
-                  height={600}
-                  loading="lazy"
-                  decoding="async"
-                  fetchPriority="low"
-                  onError={(event) => {
-                    const img = event.currentTarget;
-                    if (!img.dataset.fallbackApplied) {
-                      img.src = '/placeholder.svg';
-                      img.dataset.fallbackApplied = 'true';
-                    }
-                  }}
-                  className="h-full w-full object-cover transition-transform duration-500 motion-safe:group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-70 dark:from-slate-950" />
-                <div className="absolute inset-x-4 top-4 flex items-center justify-between">
-                  <span className="rounded-full border border-white/60 bg-white/75 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-700 shadow-sm backdrop-blur dark:border-white/10 dark:bg-slate-950/70 dark:text-slate-200">
-                    {String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="rounded-full bg-slate-950/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-white shadow-lg backdrop-blur dark:bg-indigo-500/15 dark:text-indigo-100">
-                    Case study
-                  </span>
-                </div>
-              </div>
-              <CardHeader className="pb-0 pt-6">
-                <CardTitle className="text-xl font-bold text-slate-900 transition-colors duration-300 group-hover:text-cyan-600 dark:text-white dark:group-hover:text-cyan-300">
-                  {project.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex-1 pt-4">
-                <p className="mb-5 text-sm leading-7 text-slate-600 dark:text-slate-400 md:text-base">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="rounded-full border border-sky-500/15 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-200 dark:border-sky-300/15 dark:bg-white/5 dark:text-slate-200"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter className="mt-auto flex items-center justify-between gap-3 border-t border-slate-200/70 pt-5 dark:border-white/5">
-                {project.github ? (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(event) => event.stopPropagation()}
-                    className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium text-slate-600 transition-colors duration-300 hover:bg-slate-100 hover:text-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:ring-offset-slate-900"
-                  >
-                    <GithubIcon className="w-4 h-4" />
-                    <span className="text-sm">Code</span>
-                  </a>
-                ) : (
-                  <span className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-sm text-slate-400 dark:text-slate-500" aria-label="Code link unavailable">
-                    <GithubIcon className="w-4 h-4" />
-                    <span className="text-sm">Code N/A</span>
-                  </span>
-                )}
-                {demoUrl ? (
-                  <a
-                    href={demoUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={(event) => event.stopPropagation()}
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-400 to-indigo-400 px-4 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-indigo-500/15 transition-all duration-300 hover:translate-x-0.5 hover:shadow-indigo-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
-                  >
-                    Live Demo
-                    <ArrowUpRight className="h-4 w-4" />
-                  </a>
-                ) : (
-                  <span className="rounded-full bg-slate-100 px-4 py-2 text-sm font-semibold text-slate-400 dark:bg-slate-800 dark:text-slate-500">
-                    Demo N/A
-                  </span>
-                )}
-              </CardFooter>
-              </Card>
-            </motion.div>
-            );
-          })}
-        </div>
-        {dialogOpen && selectedProject ? (
-          <Suspense fallback={null}>
-            <ProjectDetailDialog
-              project={selectedProject}
-              open={dialogOpen}
-              shouldReduceMotion={shouldReduceMotion}
-              onOpenChange={(open) => {
-                setDialogOpen(open);
-                if (!open) setSelectedProject(null);
-              }}
+        {/* Alternating project rows */}
+        <div className="space-y-20 lg:space-y-28">
+          {PROJECTS.map((project, index) => (
+            <ProjectRow
+              key={project.title}
+              project={project}
+              index={index}
+              onOpen={openProject}
+              shouldReduce={shouldReduce}
             />
-          </Suspense>
-        ) : null}
+          ))}
+        </div>
       </div>
+
+      {/* Case study dialog — lazy loaded */}
+      {dialogOpen && selectedProject && (
+        <Suspense fallback={null}>
+          <ProjectDetailDialog
+            project={selectedProject}
+            open={dialogOpen}
+            shouldReduceMotion={shouldReduce}
+            onOpenChange={(open) => {
+              setDialogOpen(open);
+              if (!open) setSelectedProject(null);
+            }}
+          />
+        </Suspense>
+      )}
     </section>
   );
 };
